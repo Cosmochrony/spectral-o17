@@ -1,6 +1,6 @@
 This repository contains the source of the **O17** Cosmochrony paper  
-[*Fibre-Level Admissibility from Conjugate Weil Blocks:
-Structural Derivation of the Pair Observable*](out/SpectralO17.pdf).
+*Fibre-Level Admissibility from Conjugate Weil Blocks:
+Structural Derivation of the Pair Observable*.
 
 This work extends the **spectral admissibility sub-programme** by resolving the
 open structural gap left by **O16**:
