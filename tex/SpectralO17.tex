@@ -36,52 +36,36 @@ in a Scalar Weil Model: A Corrective Revision\\
   \begin{abstract}
     \vspace{0.5em}
     This is a corrective revision of the version published as v1.0.
-    That draft treated as established two things that are not: O16's
-    original finite-window baseline
-    ($\dhat_{\mathrm{exact}}\approx3.72\pm0.06$, $\delta_{\mathrm{pair}}\approx7.44$),
-    withdrawn by O16's own corrective revision as unsourced; and, more
-    substantially, an identification of this paper's own toy Weil-block
-    model with the O12/O13 pipeline that measures those quantities, which
-    is not established here or anywhere in this paper's argument.
-    The claims resting on that identification --- that this paper ``closes
-    the logical gap left open in O16,'' that conjugate pairs $\{c,q-c\}$
-    ``are the fibres of~$\Pi$ as measured by the real pipeline,'' and the
-    consequent requalification of O14--O15 --- are withdrawn
+    That draft treated O16's original finite-window baseline
+    ($\dhat_{\mathrm{exact}}\approx3.72\pm0.06$,
+    $\delta_{\mathrm{pair}}\approx7.44$, withdrawn as unsourced) as
+    established, and an identification of this paper's own toy
+    Weil-block model with the O12/O13 pipeline, not established here or
+    anywhere in this paper's argument.
+    Claims resting on that identification --- that this paper ``closes the
+    logical gap left open in O16,'' that conjugate pairs are ``the fibres
+    of~$\Pi$ as measured by the real pipeline,'' and the consequent
+    requalification of O14--O15 --- are withdrawn
     (Section~\ref{sec:why_pair}).
 
-    What survives is this paper's genuinely self-contained mathematical
-    content, decoupled from any pipeline identification.
-    Theorem~\ref{thm:identity} (restricted form, equal initial support) is
-    confirmed.
-    Corollary~\ref{cor:structural_equiv} (arbitrary initial supports) is
-    strengthened: the original draft's proof asserted, without arguing,
-    that the Gram-Schmidt dynamics are independent of the labelling of
-    $e_{b_1}$, and an independent check found this step does not go
-    through as stated.
-    This revision replaces it with a direct proof establishing something
-    stronger --- not isomorphism up to a permutation, but \emph{exact}
-    equality of the raw redundancy counts, for \emph{arbitrary} blocks.
-    The proof is unconditional and needs no conjugation argument: within
-    this paper's own model, the raw count is exactly independent of the
-    character~$c$ and of both initial-condition parameters $(b_1,b_2)$ ---
-    not merely equal for conjugate pairs, but identical for
-    \emph{any two blocks whatsoever}.
-    This is a genuine strengthening of what the original draft set out to
-    prove, but it undercuts the draft's use of the result: an identity
-    holding between arbitrary, non-conjugate blocks says nothing specific
-    about the involution $c\leftrightarrow q-c$, and cannot by itself
-    support any claim about the fibres of a projection organised around
-    that particular involution.
-
-    The same block-independence result gives a clean, narrow replacement
-    for the original draft's central claim about the amplitude factor
-    $r(c,q)$: since the raw count is provably block-independent within
-    this model, any block-dependence this model's normalised observable
-    exhibits must come entirely from its normalisation denominator.
-    This replaces an unreproducible numeric example --- this repository
-    has never carried code --- with a short proof, but the conclusion is
-    scoped to this paper's own toy model and is not shown to say anything
-    about the real O12/O13 pipeline's normalisation.
+    What survives is self-contained.
+    Theorem~\ref{thm:identity} (restricted form) is confirmed.
+    Corollary~\ref{cor:structural_equiv} (arbitrary blocks) is
+    strengthened: the original proof asserted, without arguing, that the
+    dynamics are independent of $e_{b_1}$'s labelling, a step that does
+    not go through as stated.
+    This revision proves something stronger instead --- exact equality of
+    raw redundancy counts for \emph{any two blocks whatsoever}, needing no
+    conjugation argument --- which strengthens the claim but undercuts
+    its use: an identity holding between non-conjugate blocks says
+    nothing specific about $c\leftrightarrow q-c$, and cannot support any
+    claim about which blocks share a fibre.
+    The same result gives an unconditional replacement for the claim
+    about the amplitude factor $r(c,q)$: since the raw count is provably
+    block-independent, any block-dependence a normalised observable
+    exhibits must come entirely from its normalisation --- replacing an
+    unreproducible numeric example with a short proof, scoped to this
+    paper's own model.
 
     No claim about the physical relevance of conjugate pairs, the fibre
     structure of~$\Pi$, or the requalification of O14--O15 survives this
@@ -89,8 +73,7 @@ in a Scalar Weil Model: A Corrective Revision\\
   \end{abstract}
 
   \paragraph{Keywords.}
-    Weil representation, conjugate Weil blocks, Gram--Schmidt redundancy, block-independence, Heisenberg Cayley graphs,
-    scalar model, corrective revision, spectral admissibility
+    Weil representation, conjugate Weil blocks, Gram--Schmidt redundancy, block-independence, Heisenberg Cayley graphs
 
     \clearpage
     \tableofcontents
@@ -180,13 +163,13 @@ in a Scalar Weil Model: A Corrective Revision\\
     where $e_k$ denotes the $k$-th standard basis vector of $\mathbb{C}^q$.
 
     The Gram-Schmidt redundancy count at BFS shell~$n$ for this block is:
-    \begin{equation}
+    \begin{multline}
       \tilde\sigma_c(n;\, b_1, b_2)
       \;:=\; \bigl|\bigl\{g \in \mathrm{Shell}_n :
-      \rho_c(g)\,v_0(c,b_1,b_2)
+      \rho_c(g)\,v_0(c,b_1,b_2) \\
       \in \mathrm{span}\bigl\{\rho_c(h)\,v_0 : h \in \mathrm{Shell}_{<n}\bigr\}\bigr\}\bigr|.
       \label{eq:raw_sigma}
-    \end{equation}
+    \end{multline}
     This is the \emph{raw} count: the number of Weil images at shell~$n$
     that are already in the Gram-Schmidt span accumulated over
     shells~$0, \ldots, n-1$.
@@ -344,7 +327,7 @@ where shell growth wraps around $q$), is included in
 pairs agree exactly, as equation~\eqref{eq:block_indep} requires.
     \end{remark}
 
-  \section{The factor $r(c,q)$ is a normalisation artefact}
+  \section{The factor \texorpdfstring{$r(c,q)$}{r(c,q)} is a normalisation artefact}
   \label{sec:r_artefact}
 
   \subsection{Normalisation, within this paper's own model}
@@ -480,7 +463,7 @@ proved above.
       $D$ or shows it exists for the real pipeline.
     \end{corollary}
 
-  \section{Withdrawn: interpretive claims about $\Pi$ and O14--O15}
+  \section{Withdrawn: interpretive claims about \texorpdfstring{$\Pi$}{Pi} and O14--O15}
   \label{sec:why_pair}
 
   The original draft's ``hierarchy of observables,'' ``why fibre-level is
@@ -624,7 +607,6 @@ proved above.
   led to the original identification of the question addressed in
   Section~\ref{sec:identity}.
 
-  \clearpage
   \bibliographystyle{plain}
   \bibliography{cosmochrony-bibliography}
 
