@@ -1,7 +1,8 @@
 cff-version: 1.2.0
 message: "If you cite this work, please use the metadata from this file."
-title: "Exact Block-Independence of Raw Gram-Schmidt Redundancy in a Scalar Weil Model: A Corrective Revision — O17 — Spectral Admissibility Subprogram"
+title: "Exact Block-Independence of Raw Gram-Schmidt Redundancy in a Scalar Weil Model — O17 — Spectral Admissibility Subprogram"
 type: software
+version: "1.2"
 authors:
   - family-names: "Beau"
     given-names: "Jérôme"
@@ -11,7 +12,7 @@ doi: "10.5281/zenodo.19299611"
 license: "CC-BY-4.0"
 preferred-citation:
   type: article
-  title: "Exact Block-Independence of Raw Gram-Schmidt Redundancy in a Scalar Weil Model: A Corrective Revision — O17 — Spectral Admissibility Subprogram"
+  title: "Exact Block-Independence of Raw Gram-Schmidt Redundancy in a Scalar Weil Model — O17 — Spectral Admissibility Subprogram"
   authors:
     - family-names: "Beau"
       given-names: "Jérôme"
