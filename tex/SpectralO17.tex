@@ -21,13 +21,13 @@
 \newcommand{\Fq}{(\mathbb{Z}/q\mathbb{Z})^*}
 
 \title{Exact Block-Independence of Raw Gram-Schmidt Redundancy\\
-in a Scalar Weil Model: A Corrective Revision\\
+in a Scalar Weil Model\\
 \large O17 --- Spectral Admissibility Subprogram}
 
 \author{J.~Beau\\
 \small Independent Researcher}
 
-\date{2026\\Version 1.1}
+\date{2026\\Version 1.2}
 
 \begin{document}
 
@@ -35,41 +35,37 @@ in a Scalar Weil Model: A Corrective Revision\\
 
   \begin{abstract}
     \vspace{0.5em}
-    This is a corrective revision of the version published as v1.0.
-    That draft treated O16's original finite-window baseline
-    ($\dhat_{\mathrm{exact}}\approx3.72\pm0.06$,
-    $\delta_{\mathrm{pair}}\approx7.44$, withdrawn as unsourced) as
-    established, and an identification of this paper's own toy
-    Weil-block model with the O12/O13 pipeline, not established here or
-    anywhere in this paper's argument.
-    Claims resting on that identification --- that this paper ``closes the
-    logical gap left open in O16,'' that conjugate pairs are ``the fibres
-    of~$\Pi$ as measured by the real pipeline,'' and the consequent
-    requalification of O14--O15 --- are withdrawn
-    (Section~\ref{sec:why_pair}).
+    Within a scalar Weil-representation toy model on $\mathbb{C}^q$, the
+    raw Gram-Schmidt redundancy count $\tilde\sigma_c(n;b_1,b_2)$ at BFS
+    shell~$n$ is \emph{exactly} independent of the central
+    character~$c \in \Fq$ and of both initial-condition
+    parameters~$(b_1,b_2)$ (Theorem~\ref{thm:identity},
+    Corollary~\ref{cor:structural_equiv}): not only equal for conjugate
+    characters $c$ and $q-c$, but identical for \emph{any} two blocks
+    whatsoever.
+    The proof is purely combinatorial --- translation-invariance of
+    shell-label collisions on the underlying Cayley graph --- and needs
+    no conjugation identity.
+    A direct consequence: for any normalised observable
+    $\sigma_c := \tilde\sigma_c/D$ defined within this model, all of its
+    block-dependence resides entirely in the normalisation~$D$
+    (Proposition~\ref{prop:r_artefact}); if that dependence happens to be
+    shell-index-independent, the pair-level exponent adds without any
+    contribution from~$D$ (Corollary~\ref{cor:r_inert}).
 
-    What survives is self-contained.
-    Theorem~\ref{thm:identity} (restricted form) is confirmed.
-    Corollary~\ref{cor:structural_equiv} (arbitrary blocks) is
-    strengthened: the original proof asserted, without arguing, that the
-    dynamics are independent of $e_{b_1}$'s labelling, a step that does
-    not go through as stated.
-    This revision proves something stronger instead --- exact equality of
-    raw redundancy counts for \emph{any two blocks whatsoever}, needing no
-    conjugation argument --- which strengthens the claim but undercuts
-    its use: an identity holding between non-conjugate blocks says
-    nothing specific about $c\leftrightarrow q-c$, and cannot support any
-    claim about which blocks share a fibre.
-    The same result gives an unconditional replacement for the claim
-    about the amplitude factor $r(c,q)$: since the raw count is provably
-    block-independent, any block-dependence a normalised observable
-    exhibits must come entirely from its normalisation --- replacing an
-    unreproducible numeric example with a short proof, scoped to this
-    paper's own model.
-
-    No claim about the physical relevance of conjugate pairs, the fibre
-    structure of~$\Pi$, or the requalification of O14--O15 survives this
-    revision.
+    These results are scoped strictly to this paper's own toy model,
+    whose block fingerprints are single \emph{position}-basis vectors
+    $e_k$ (equation~\eqref{eq:v0}).
+    The real O12/O13 pipeline's exact fingerprints are single
+    \emph{frequency}-basis vectors indexed by a generic triple
+    $(c_1,c_2,c_3)$, not a scalar~$c$; no map between the two index
+    spaces is given here, so none of the results above is asserted for
+    that pipeline.
+    Because block-independence in this model holds for \emph{any} two
+    blocks and not only conjugate ones, it cannot by itself be a
+    criterion for grouping specifically conjugate blocks into fibres of a
+    projection~$\Pi$ (Section~\ref{sec:why_pair}): applied uniformly, it
+    would place every block in one fibre.
   \end{abstract}
 
   \paragraph{Keywords.}
@@ -81,38 +77,19 @@ in a Scalar Weil Model: A Corrective Revision\\
 
     \clearpage
 
-  \section{The open problem after O16}
+  \section{The open question}
   \label{sec:problem}
 
-  The original draft of this paper (v1.0) opened from O16's original
-  claims: a finite-window baseline
-  $\dhat_{\mathrm{exact}} \approx 3.72 \pm 0.06$, a doubled exponent
-  $\delta_{\mathrm{pair}} \approx 7.44$, and a proposition that conjugate
-  sigma-profiles differ by an integer factor $r(c,q)\in\{1,2,3,4\}$,
-  attributed to the O12/O13 pipeline~\cite{Beau2026a16,Beau2026a17}.
-  O16's own corrective revision has since withdrawn all three: the
-  baseline is untraceable to any table in the current O12--O15 texts;
-  the $r(c,q)\in\{1,2,3,4\}$ proposition would contradict O12's own
-  proved exact fact $\Sigma_n^{(c)}=\Sigma_n^{(-c)}$ if O16's $\sigma_c(n)$
-  were the pipeline's $\Sigma_n^{(c_1,c_2,c_3)}$, an identification O16
-  itself no longer asserts; and the citation below to ``O15
-  Corollary~4.8'' invoked an unconditional no-go that O15's own
-  corrective revision found false as originally stated, replacing it
-  with a narrower form (specific dynamical weights, hypothesis since
-  verified at two of the five tested primes, $q=151$ and $q=211$, still
-  open at the other three ($q=29,61,101$), bounding against
-  $\dhat_{\mathrm{exact}}$ rather than the withdrawn $3.72\pm0.06$).
-  None of these three numbers is used or needed below.
-
-  What O16 did establish, and what motivates this paper's own toy model,
-  is a \emph{question}: O16 proposed a pair-level observable
-  $\sigma_{\mathrm{pair}}(n) := \sigma_c(n)\,\sigma_{q-c}(n)$ built from
-  the exact conjugation identity $\rho_{q-c}=\overline{\rho_c}$, but
-  explicitly acknowledged that the identification of conjugate pairs with
-  the \emph{fibres of~$\Pi$} was a structurally motivated hypothesis, not
-  a derived result.
-  Two narrower, purely mathematical questions were left open about the
-  raw dynamics underlying that proposal:
+  O16 proposes a pair-level observable
+  $\sigma_{\mathrm{pair}}(n) := \sigma_c(n)\,\sigma_{q-c}(n)$, built from
+  the exact conjugation identity $\rho_{q-c}=\overline{\rho_c}$, as a
+  candidate fibre-level unit of admissibility~\cite{Beau2026a20}.
+  That identification rests on two separate hypotheses --- that the
+  non-injective projection~$\Pi$ carries a parity involution, and that
+  this involution is realised, in the Weil representation, as
+  $c \mapsto q-c$ --- neither derived from first principles.
+  Independently of those hypotheses, two purely mathematical questions
+  about the raw dynamics underlying the proposal are open:
 
   \begin{itemize}
     \item[(Q1)] Why is the raw Gram-Schmidt dynamics identical for
@@ -126,16 +103,12 @@ in a Scalar Weil Model: A Corrective Revision\\
     Is it an arithmetic invariant of $(c,q)$, or a pipeline artefact?
   \end{itemize}
 
-  The present paper answers both questions, but only within its own
-  explicitly defined toy model (Section~\ref{sec:identity}), not for the
-  real O12/O13 pipeline.
-  The original draft's claim that this closes O16's logical gap and
-  derives ``the observable class dictated by~$\Pi$'' is withdrawn
-  (Section~\ref{sec:why_pair}): as Section~\ref{sec:identity} shows, the
-  answer to (Q1)--(Q2) in this toy model turns out to hold for
-  \emph{any} two blocks, conjugate or not, which is too strong a fact to
-  say anything specific about the involution $c \leftrightarrow q-c$ that
-  motivates O16's fibre proposal.
+  This paper answers both questions, within an explicitly defined toy
+  model (Section~\ref{sec:identity}), for that model alone: as
+  Section~\ref{sec:identity} shows, the answer to (Q1)--(Q2) in this toy
+  model holds for \emph{any} two blocks, conjugate or not, a fact whose
+  scope for the fibre question is examined in
+  Section~\ref{sec:why_pair}.
 
   \section{Identity of raw Gram-Schmidt dynamics}
   \label{sec:identity}
@@ -151,8 +124,8 @@ in a Scalar Weil Model: A Corrective Revision\\
       \label{eq:weil_def}
     \end{equation}
     A block in \emph{this paper's own toy model} --- not shown to
-    coincide with the real O12/O13 pipeline's actual block structure, a
-    generic triple $(c_1,c_2,c_3)$ with frequency-domain fingerprints
+    coincide with the real O12/O13 pipeline's block structure, a generic
+    triple $(c_1,c_2,c_3)$ with frequency-domain fingerprints
     (Section~\ref{sec:why_pair}) --- is specified by a triple
     $(c, b_1, b_2) \in \Fq \times (\ZqZ)^2$, with initial fingerprint
     vector:
@@ -178,7 +151,7 @@ in a Scalar Weil Model: A Corrective Revision\\
   \subsection{Main results}
 
     The analysis splits into two levels: an exact equality under a support
-    condition, and a structural isomorphism for arbitrary block parameters.
+    condition, and block-independence for arbitrary block parameters.
 
     \begin{theorem}[Identity of raw dynamics, restricted form]
       \label{thm:identity}
@@ -223,18 +196,15 @@ in a Scalar Weil Model: A Corrective Revision\\
       if and only if its complex conjugate is.
     \end{proof}
 
-    \begin{remark}[Scope of Theorem~\ref{thm:identity} --- corrected]
+    \begin{remark}[Scope of Theorem~\ref{thm:identity}]
       \label{rem:scope}
-      The original draft stated that, for differing initial supports, the
-      two dynamics remain isomorphic but ``pointwise equality of counts
-      may fail.''
-      This is incorrect: Corollary~\ref{cor:structural_equiv} below
-      establishes exact pointwise equality even when $b_1 \neq b_1'$, for
-      a reason independent of the conjugation identity used in
+      Exact pointwise equality of the raw counts holds even when
+      $b_1 \neq b_1'$ (Corollary~\ref{cor:structural_equiv} below), for a
+      reason independent of the conjugation identity used in
       Theorem~\ref{thm:identity}'s proof.
     \end{remark}
 
-    \begin{corollary}[Block-independence of the raw redundancy count --- strengthened]
+    \begin{corollary}[Block-independence of the raw redundancy count]
       \label{cor:structural_equiv}
       For \emph{any} two blocks $(c,b_1,b_2)$ and $(c',b_1',b_2')$ with
       $c,c' \in \Fq$ arbitrary (not necessarily conjugate) and
@@ -246,9 +216,6 @@ in a Scalar Weil Model: A Corrective Revision\\
       \end{equation}
       In particular $\delta_{c'} = \delta_c$ for any $c,c'$, not only for
       conjugate pairs.
-      The original draft's version of this statement (restricted to
-      $c'=q-c$, and only up to a permutation of generator ordering) is
-      superseded by this stronger, unconditional form.
     \end{corollary}
 
     \begin{proof}
@@ -300,32 +267,27 @@ in a Scalar Weil Model: A Corrective Revision\\
 Theorem~\ref{thm:identity} and Corollary~\ref{cor:structural_equiv}
 together establish exact pointwise equality of $\tilde\sigma$ across
 \emph{every} block, not only conjugate ones.
-This is stronger than what the original draft claimed, but it is a
-statement about this paper's own toy model
+This is a statement about this paper's own toy model
 (equation~\eqref{eq:weil_def}), and it is exactly this strength that
-undercuts the interpretive use made of it in
-Section~\ref{sec:why_pair}: a fact holding between arbitrary,
-non-conjugate blocks cannot, by itself, be evidence that conjugate
-pairs specifically are the fibres of a projection~$\Pi$ organised
-around the involution $c\leftrightarrow q-c$.
+limits its interpretive use in Section~\ref{sec:why_pair}: a fact
+holding between arbitrary, non-conjugate blocks cannot, by itself, be
+evidence that conjugate pairs specifically are the fibres of a
+projection~$\Pi$ organised around the involution $c\leftrightarrow q-c$.
 Whatever such fibres are, this identity does not distinguish them from
 any other pairing of blocks.
     \end{remark}
 
-    \begin{remark}[Numerical confirmation --- corrected attribution]
-The original draft's worked example, for $(c{=}1,c{=}60)$ at $q=61$
-with blocks $(b_1{=}27,b_2{=}2)$ and $(b_1{=}3,b_2{=}30)$, used
-$b_1\neq b_1'$ ($27\neq3$): it therefore already tested
-Corollary~\ref{cor:structural_equiv}'s general case, not
-Theorem~\ref{thm:identity}'s restricted one, contrary to what it
-claimed to confirm.
-A script reproducing this example, and independently testing
-equation~\eqref{eq:block_indep} between genuinely unrelated
-(non-conjugate) blocks at $q=29$ out to $n=20$ (well past the point
-where shell growth wraps around $q$), is included in
-\texttt{code/o17\_block\_independence\_check.py}
-(\texttt{python3 o17\_block\_independence\_check.py}); all tested
-pairs agree exactly, as equation~\eqref{eq:block_indep} requires.
+    \begin{remark}[Numerical confirmation]
+A script verifying equation~\eqref{eq:block_indep} --- reproducing the
+worked example $(c{=}1,c{=}60)$ at $q=61$ with blocks
+$(b_1{=}27,b_2{=}2)$ and $(b_1{=}3,b_2{=}30)$, and independently testing
+the identity between genuinely unrelated (non-conjugate) blocks at
+$q=29$ out to $n=20$ (well past the point where shell growth wraps
+around $q$) --- is included in the accompanying verification script,
+\texttt{code/o17\_block\allowbreak\_independence\allowbreak\_check.py},
+run as \texttt{python3 o17\_block\allowbreak\_independence\allowbreak\_check.py}.
+All tested pairs agree exactly, as equation~\eqref{eq:block_indep}
+requires.
     \end{remark}
 
   \section{The factor \texorpdfstring{$r(c,q)$}{r(c,q)} is a normalisation artefact}
@@ -333,16 +295,11 @@ pairs agree exactly, as equation~\eqref{eq:block_indep} requires.
 
   \subsection{Normalisation, within this paper's own model}
 
-    The original draft asserted that ``the pipeline observable $\sigma_c(n)$
-    reported in O12--O15'' is a normalised form of the raw count
-    $\tilde\sigma_c(n)$.
-    This is not established: no argument is given here, or anywhere in
-    this paper, that the real O12/O13 pipeline's $\Sigma_n^{(c_1,c_2,c_3)}$
-    decomposes this way, and Section~\ref{sec:why_pair} withdraws the
-    identification of this paper's model with that pipeline entirely.
-    What follows is instead a statement purely internal to this paper's
-    own toy model: \emph{if} a normalised observable is defined, within
-    this model, as
+    No argument is given here, or anywhere in this paper, that the real
+    O12/O13 pipeline's $\Sigma_n^{(c_1,c_2,c_3)}$ decomposes into a raw
+    count times a normalisation; what follows is a statement purely
+    internal to this paper's own toy model:
+    \emph{if} a normalised observable is defined, within this model, as
     \begin{equation}
       \sigma_\gamma(n;\, k, b_2)
       \;:=\; \frac{\tilde\sigma_\gamma(n;\, k, b_2)}{D(\gamma, k, b_2, n)}
@@ -368,7 +325,7 @@ pairs agree exactly, as equation~\eqref{eq:block_indep} requires.
     In particular, restricted to conjugate pairs $\gamma'=q-\gamma$, this
     recovers O16's ratio $r(c,q) = D(c,k,b_2,n)/D(q-c,k',b_2',n)$.
 
-    \begin{proposition}[$r$ is a normalisation artefact --- proof corrected]
+    \begin{proposition}[$r$ is a normalisation artefact]
       \label{prop:r_artefact}
       Within the setting of equation~\eqref{eq:sigma_normalised}, if $r$
       (or its generalisation~\eqref{eq:r_ratio} between arbitrary blocks)
@@ -388,20 +345,6 @@ pairs agree exactly, as equation~\eqref{eq:block_indep} requires.
       function $\tilde\sigma(n;q)$.
     \end{proof}
 
-    \begin{remark}[What changed from the original draft]
-The original draft's Proposition (there stated as ``$r$ depends on
-block parameters, not on $(c,q)$'') was supported by a specific numeric
-example ($q=29$, character $c=11$ with two block instances, paired
-against $c=18$, giving $r=2$ or $r=1$ depending on which instance was
-used).
-This repository has never carried code computing $\sigma_c(n)$, $r$, or
-$D$: the example was not reproducible and is withdrawn.
-The proposition's \emph{conclusion} survives, but for a different, and
-now unconditional, reason: it is a direct logical consequence of
-Corollary~\ref{cor:structural_equiv}, needing no numeric example at all,
-proved above.
-    \end{remark}
-
   \subsection{Consequences, and their scope}
 
     \begin{corollary}[Inertness of $r$ for the exponent --- conditional]
@@ -412,9 +355,8 @@ proved above.
       $\log\sigma_{\mathrm{pair}}(n) = \log r + \log\sigma_c(n) + \log\sigma_{q-c}(n)$,
       so $\delta_{\mathrm{pair}} = \delta_c + \delta_{q-c}$: the value of
       $r$ does not affect the exponent.
-      This is the same conditional statement as O16's
-      equation~(doubling), restated here; whether any sourced $D$
-      satisfies the hypothesis is not addressed by this paper.
+      Whether any sourced $D$ satisfies this hypothesis is not addressed
+      by this paper.
     \end{corollary}
 
     \begin{remark}[$r$ is gauge-like, within this model]
@@ -429,27 +371,7 @@ proved above.
       whose functional form this paper does not examine.
     \end{remark}
 
-    \begin{corollary}[Consistency with O16 Remark~6.4's own withdrawal]
-      \label{cor:remark_closure}
-      O16's original speculation that $r(c,q)$ might originate from
-      quadratic Gauss sums or character multiplicities was itself already
-      withdrawn by O16's own corrective revision~\cite{Beau2026a20} (its
-      remark on the amplitude factor: the speculation depended on O16's
-      proposition on conjugate sigma-profile proportionality, withdrawn
-      there for lack of a reproducible source), on grounds independent of
-      this paper.
-      This paper's Proposition~\ref{prop:r_artefact} reaches a compatible
-      conclusion --- $r$ is determined entirely by the normalisation~$D$,
-      not by any representation-theoretic quantity --- but within its own
-      model and by a different route (block-independence of the raw
-      count), not as a new closure of an O16 question that O16 had
-      already closed itself.
-      This conclusion is scoped to the model of
-      equation~\eqref{eq:sigma_normalised}; it is not established for the
-      real pipeline's actual, unexamined normalisation.
-    \end{corollary}
-
-    \begin{corollary}[The structural invariant --- strengthened, and reinterpreted]
+    \begin{corollary}[The structural invariant]
       \label{cor:invariant}
       The raw redundancy count $\tilde\sigma$ is exactly block-independent
       (Corollary~\ref{cor:structural_equiv}): $\delta$ computed from
@@ -464,70 +386,34 @@ proved above.
       $D$ or shows it exists for the real pipeline.
     \end{corollary}
 
-  \section{Withdrawn: interpretive claims about \texorpdfstring{$\Pi$}{Pi} and O14--O15}
+  \section{Scope: block-independence and the fibre structure of \texorpdfstring{$\Pi$}{Pi}}
   \label{sec:why_pair}
 
-  The original draft's ``hierarchy of observables,'' ``why fibre-level is
-  the correct class,'' and ``requalification of O14--O15'' subsections are
-  withdrawn in full.
-  Two independent reasons apply.
-
-  \paragraph{The pipeline identification is not established.}
-    Everything below rested on treating this paper's toy model
-    (Section~\ref{sec:identity}) as a derivation of ``the observable class
-    dictated by $\Pi$'' for the real O12/O13 pipeline.
-    No argument anywhere in this paper connects the toy representation of
-    equation~\eqref{eq:weil_def} --- whose fingerprint vectors are single
-    \emph{position}-basis vectors $e_k$ --- to the real pipeline's actual
-    fingerprint construction, whose vectors are single
+  \paragraph{Relation to the O12/O13 pipeline.}
+    This paper's toy model (Section~\ref{sec:identity}) is not shown to
+    coincide with the real O12/O13 pipeline.
+    The toy representation of equation~\eqref{eq:weil_def} has fingerprint
+    vectors that are single \emph{position}-basis vectors $e_k$; the real
+    pipeline's actual fingerprint construction uses single
     \emph{frequency}-basis vectors indexed by a generic triple
     $(c_1,c_2,c_3)$, not a scalar~$c$.
-    The claim that conjugate pairs ``are the fibres of $\Pi$ as measured
-    by the real pipeline'' is accordingly withdrawn, along with the
-    consequent ``requalification'' of O14--O15 as correct-but-incomplete
-    block-level analyses.
+    No argument in this paper connects the two, so none of the results of
+    Sections~\ref{sec:identity}--\ref{sec:r_artefact} is asserted for the
+    real pipeline.
 
-  \paragraph{The argument, taken on its own terms, proves too much.}
-    Independently of the pipeline question, the original draft's central
-    step --- ``$\rho_c$ and $\rho_{q-c}$ produce identical Gram-Schmidt
-    dynamics, indicating indistinguishable observable content, hence the
-    same fibre of $\Pi$'' --- no longer supports what it is used for.
-    Corollary~\ref{cor:structural_equiv} (Section~\ref{sec:identity})
-    shows that \emph{every} pair of blocks, conjugate or not, produces
-    identical raw Gram-Schmidt dynamics in this toy model.
-    Applying the original draft's own inference rule (identical dynamics
-    $\Rightarrow$ same fibre) to that stronger fact would place
-    \emph{every} block in a single common fibre, collapsing the fibre
-    structure entirely --- not the pairwise structure $\{c,q-c\}$ the
-    argument was meant to establish.
-    Since the original draft did not intend or defend that collapsed
-    conclusion, its inference rule cannot be sound as stated; the
-    ``identical dynamics'' fact, on its own, does not license any
-    conclusion about which blocks share a fibre.
-
-  \paragraph{O15's citation, corrected.}
-    The withdrawn ``O15 Corollary~4.8 establishes that no reweighting of
-    block data recovers the fibre-level exponent'' cited an unconditional
-    no-go that O15's own corrective revision found false as originally
-    stated (explicit counterexample: asymmetric weight concentration
-    exceeds $\dhat_{\mathrm{exact}}$).
-    The corrected corollary is narrower --- specific dynamical weights,
-    hypothesis since verified at two of the five tested primes
-    ($q=151$ and $q=211$), still open at the other three
-    ($q=29,61,101$), bounding against
-    $\dhat_{\mathrm{exact}}$ --- and in any case concerns the real
-    pipeline's block-level observable, not this paper's toy model, to
-    which it was never shown to apply.
-    The ``complementarity of O15 and O17'' remark, and the ``O15 closes
-    the block-level programme; O17 opens the fibre-level programme''
-    framing, depend on both withdrawn premises and are withdrawn with
-    them.
-
-  No claim about $\Pi$'s fibre structure, about O14--O15's completeness,
-  or about the physical status of conjugate pairs is asserted in this
-  revision.
-  What Section~\ref{sec:identity} establishes stands on its own, entirely
-  independently of this section's withdrawn interpretive superstructure.
+  \paragraph{What block-independence can and cannot support about fibres.}
+    Corollary~\ref{cor:structural_equiv} shows that \emph{every} pair of
+    blocks, conjugate or not, produces identical raw Gram-Schmidt dynamics
+    in this toy model.
+    A criterion of the form ``identical raw dynamics $\Rightarrow$ same
+    fibre of~$\Pi$'' would, applied to that fact, place \emph{every} block
+    in a single common fibre, collapsing the fibre structure entirely ---
+    not the pairwise structure $\{c,q-c\}$ that motivates O16's
+    proposal~\cite{Beau2026a20}.
+    Identical raw dynamics, on its own, therefore does not license any
+    conclusion about which blocks specifically share a fibre; a
+    genuinely selective criterion, distinguishing conjugate pairs from
+    other block pairings, is not supplied here.
 
   \section{Summary and open directions}
   \label{sec:summary}
@@ -542,13 +428,11 @@ proved above.
       --- not only equal for conjugate pairs, but identical for
       \emph{any} two blocks whatsoever
       (Theorem~\ref{thm:identity}, Corollary~\ref{cor:structural_equiv}).
-      This is stronger than, and supersedes, the original draft's
-      permutation-isomorphism claim.
 
       \item This block-independence is a purely combinatorial fact about
       the underlying Cayley graph (translation-invariance of shell-label
       collisions), proved without appeal to the conjugation identity
-      $\rho_{q-c}=\overline{\rho_c}$, although that identity remains
+      $\rho_{q-c}=\overline{\rho_c}$, although that identity is
       independently true and is used in Theorem~\ref{thm:identity}'s own
       proof for the restricted case.
 
@@ -561,17 +445,6 @@ proved above.
       This is scoped strictly to this paper's own model; whether it says
       anything about the real O12/O13 pipeline's actual normalisation is
       not addressed.
-
-      \item \textbf{Withdrawn.}
-      The original draft's claims that the pair observable is the
-      correct unit of admissibility because conjugate pairs are the
-      fibres of $\Pi$, and that O14--O15 are ``correct-but-incomplete''
-      block-level analyses requalified by this paper, are withdrawn in
-      full (Section~\ref{sec:why_pair}): the pipeline identification
-      needed for either claim is not established, and item~1's stronger
-      form shows the ``identical dynamics $\Rightarrow$ same fibre''
-      argument, taken literally, would place \emph{every} block in one
-      fibre --- not the conclusion the original draft drew from it.
     \end{enumerate}
 
   \subsection{Open directions}
@@ -588,28 +461,24 @@ proved above.
 
     \paragraph{The fibre structure of $\Pi$.}
       The identification of any specific pairing or grouping of blocks
-      with the fibres of the non-injective projection~$\Pi$ remains
+      with the fibres of the non-injective projection~$\Pi$ is
       entirely open.
-      Item~1's stronger block-independence result shows that ``identical
-      raw dynamics'' cannot by itself be the criterion, since it holds
-      too broadly; a different, genuinely selective criterion would be
-      needed to justify grouping specifically conjugate blocks (or any
-      other specific grouping) into fibres.
-
-    \paragraph{Upper bound of the phenomenological window --- unreproducible, withdrawn.}
-      The original draft cited ``numerical exploration (post-O16)''
-      showing a spectrum of $\delta_{\mathrm{pair}}$ values bounded near
-      $7.4$ and extending above $10.6$.
-      This repository has never carried code or data supporting this
-      claim; it is withdrawn for lack of a reproducible source.
+      The block-independence result of Section~\ref{sec:identity} shows
+      that ``identical raw dynamics'' cannot by itself be the criterion,
+      since it holds too broadly; a different, genuinely selective
+      criterion would be needed to justify grouping specifically
+      conjugate blocks (or any other specific grouping) into fibres.
 
   \section*{Acknowledgements}
 
   The author thanks the extended Cosmochrony programme discussions that
-  led to the original identification of the question addressed in
+  led to the identification of the question addressed in
   Section~\ref{sec:identity}.
 
   \bibliographystyle{plain}
+  \begingroup
+  \raggedright
   \bibliography{cosmochrony-bibliography}
+  \endgroup
 
 \end{document}
