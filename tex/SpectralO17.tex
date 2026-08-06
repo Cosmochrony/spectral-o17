@@ -20,55 +20,77 @@
 \newcommand{\ZqZ}{\mathbb{Z}/q\mathbb{Z}}
 \newcommand{\Fq}{(\mathbb{Z}/q\mathbb{Z})^*}
 
-\title{Fibre-Level Admissibility from Conjugate Weil Blocks:\\
-Structural Derivation of the Pair Observable\\
+\title{Exact Block-Independence of Raw Gram-Schmidt Redundancy\\
+in a Scalar Weil Model: A Corrective Revision\\
 \large O17 --- Spectral Admissibility Subprogram}
 
 \author{J.~Beau\\
 \small Independent Researcher}
 
-\date{2026}
+\date{2026\\Version 1.1}
 
 \begin{document}
 
   \maketitle
 
   \begin{abstract}
-    O16~\cite{Beau2026a20} established that the physically relevant observable
-    for the Weil-block capacity problem is defined on conjugate pairs
-    $\{c, q-c\}$ rather than on individual spectral blocks,
-    yielding the doubling $\delta_{\mathrm{pair}} = 2\,\delta_c \approx 7.44$
-    consistent with the phenomenological range $[7.4, 10.6]$.
-    However, the identification of conjugate pairs with the fibres of the
-    non-injective projection~$\Pi$ was stated there as a structurally
-    motivated hypothesis rather than a derived result.
-    The present paper provides the structural derivation.
-    We show that the raw Gram-Schmidt redundancy counts are
-    \emph{exactly identical} when the initial supports coincide,
-    and are structurally equivalent in general,
-    establishing that conjugate blocks carry the same dynamical information.
-    The proportionality constant $r(c,q)$ appearing in O16 is shown to
-    be a normalisation artefact of the pipeline, not an intrinsic
-    invariant of the representation.
-    The only structurally robust quantity is therefore the equality
-    $\delta_c = \delta_{q-c}$, which follows from the conjugation
-    identity $\rho_{q-c} = \overline{\rho_c}$ and the norm-invariance
-    of Gram-Schmidt orthogonalisation.
-    This closes the logical gap left open in O16 and requalifies the
-    O12--O15 results as correct analyses of a block-level observable
-    that is not the appropriate physical unit.
-    A key outcome of this work is the elimination of a misleading
-    structural hypothesis: the factor $r(c,q)$, initially suspected
-    in O16 to carry arithmetic significance (quadratic Gauss sums or
-    character multiplicities), is shown here to be purely
-    normalisation-dependent and gauge-like.
-    This simplifies the theoretical structure by removing an
-    apparent invariant that was not one.
+    \vspace{0.5em}
+    This is a corrective revision of the version published as v1.0.
+    That draft treated as established two things that are not: O16's
+    original finite-window baseline
+    ($\dhat_{\mathrm{exact}}\approx3.72\pm0.06$, $\delta_{\mathrm{pair}}\approx7.44$),
+    withdrawn by O16's own corrective revision as unsourced; and, more
+    substantially, an identification of this paper's own toy Weil-block
+    model with the O12/O13 pipeline that measures those quantities, which
+    is not established here or anywhere in this paper's argument.
+    The claims resting on that identification --- that this paper ``closes
+    the logical gap left open in O16,'' that conjugate pairs $\{c,q-c\}$
+    ``are the fibres of~$\Pi$ as measured by the real pipeline,'' and the
+    consequent requalification of O14--O15 --- are withdrawn
+    (Section~\ref{sec:why_pair}).
+
+    What survives is this paper's genuinely self-contained mathematical
+    content, decoupled from any pipeline identification.
+    Theorem~\ref{thm:identity} (restricted form, equal initial support) is
+    confirmed.
+    Corollary~\ref{cor:structural_equiv} (arbitrary initial supports) is
+    strengthened: the original draft's proof asserted, without arguing,
+    that the Gram-Schmidt dynamics are independent of the labelling of
+    $e_{b_1}$, and an independent check found this step does not go
+    through as stated.
+    This revision replaces it with a direct proof establishing something
+    stronger --- not isomorphism up to a permutation, but \emph{exact}
+    equality of the raw redundancy counts, for \emph{arbitrary} blocks.
+    The proof is unconditional and needs no conjugation argument: within
+    this paper's own model, the raw count is exactly independent of the
+    character~$c$ and of both initial-condition parameters $(b_1,b_2)$ ---
+    not merely equal for conjugate pairs, but identical for
+    \emph{any two blocks whatsoever}.
+    This is a genuine strengthening of what the original draft set out to
+    prove, but it undercuts the draft's use of the result: an identity
+    holding between arbitrary, non-conjugate blocks says nothing specific
+    about the involution $c\leftrightarrow q-c$, and cannot by itself
+    support any claim about the fibres of a projection organised around
+    that particular involution.
+
+    The same block-independence result gives a clean, narrow replacement
+    for the original draft's central claim about the amplitude factor
+    $r(c,q)$: since the raw count is provably block-independent within
+    this model, any block-dependence this model's normalised observable
+    exhibits must come entirely from its normalisation denominator.
+    This replaces an unreproducible numeric example --- this repository
+    has never carried code --- with a short proof, but the conclusion is
+    scoped to this paper's own toy model and is not shown to say anything
+    about the real O12/O13 pipeline's normalisation.
+
+    No claim about the physical relevance of conjugate pairs, the fibre
+    structure of~$\Pi$, or the requalification of O14--O15 survives this
+    revision.
   \end{abstract}
 
   \paragraph{Keywords.}
-    fibre-level admissibility, conjugate Weil blocks, pair observable, projection non-injectivity, Weil representation,
-    Heisenberg Cayley graphs, Gram–Schmidt redundancy, projective capacity, exponent doubling, observable hierarchy
+    Weil representation, conjugate Weil blocks, Gram--Schmidt redundancy, block-independence, Heisenberg Cayley graphs,
+    scalar model, corrective revision, spectral admissibility
 
     \clearpage
     \tableofcontents
@@ -78,36 +100,34 @@ Structural Derivation of the Pair Observable\\
   \section{The open problem after O16}
   \label{sec:problem}
 
-  O16~\cite{Beau2026a20} identified the following situation.
-  The Weil-block pipeline of O12--O15~%
-  \cite{Beau2026a16,Beau2026a17,Beau2026a18,Beau2026a19}
-  measures the redundancy observable $\sigma_c(n)$ for individual
-  blocks indexed by a central character~$c \in \Fq$.
-  The fitted exponent $\dhat_{\mathrm{exact}} \approx 3.72 \pm 0.06$
-  is structurally below the phenomenological target $[7.4, 10.6]$,
-  and no reweighting of block data can raise it above this value
-  (O15 Corollary~4.8~\cite{Beau2026a19}).
+  The original draft of this paper (v1.0) opened from O16's original
+  claims: a finite-window baseline
+  $\dhat_{\mathrm{exact}} \approx 3.72 \pm 0.06$, a doubled exponent
+  $\delta_{\mathrm{pair}} \approx 7.44$, and a proposition that conjugate
+  sigma-profiles differ by an integer factor $r(c,q)\in\{1,2,3,4\}$,
+  attributed to the O12/O13 pipeline~\cite{Beau2026a16,Beau2026a17}.
+  O16's own corrective revision has since withdrawn all three: the
+  baseline is untraceable to any table in the current O12--O15 texts;
+  the $r(c,q)\in\{1,2,3,4\}$ proposition would contradict O12's own
+  proved exact fact $\Sigma_n^{(c)}=\Sigma_n^{(-c)}$ if O16's $\sigma_c(n)$
+  were the pipeline's $\Sigma_n^{(c_1,c_2,c_3)}$, an identification O16
+  itself no longer asserts; and the citation below to ``O15
+  Corollary~4.8'' invoked an unconditional no-go that O15's own
+  corrective revision found false as originally stated, replacing it
+  with a narrower form (specific dynamical weights, hypothesis unverified
+  at any tested prime, bounding against $\dhat_{\mathrm{exact}}$ rather
+  than the withdrawn $3.72\pm0.06$).
+  None of these three numbers is used or needed below.
 
-  O16 proposed that the correct observable is defined on
-  \emph{conjugate pairs} $\{c, q-c\}$:
-  \begin{equation}
-    \sigma_{\mathrm{pair}}(n) := \sigma_c(n)\,\sigma_{q-c}(n),
-    \label{eq:sigma_pair}
-  \end{equation}
-  yielding $\delta_{\mathrm{pair}} = 2\,\delta_c \approx 7.44$.
-  This was supported by:
-  \begin{enumerate}
-    \item the exact conjugation identity $\rho_{q-c} = \overline{\rho_c}$,
-    \item numerical verification that $\delta_{q-c} = \delta_c$ to
-    machine precision,
-    \item the observation that $\sigma_{\mathrm{pair}}(n)$ follows a
-    significantly cleaner power law than $\bar\sigma(n)$.
-  \end{enumerate}
-
-  However, O16 explicitly acknowledged (Remark~6.2) that the
-  identification of conjugate pairs with the \emph{fibres of~$\Pi$}
-  was not yet derived from first principles.
-  Two questions were left open:
+  What O16 did establish, and what motivates this paper's own toy model,
+  is a \emph{question}: O16 proposed a pair-level observable
+  $\sigma_{\mathrm{pair}}(n) := \sigma_c(n)\,\sigma_{q-c}(n)$ built from
+  the exact conjugation identity $\rho_{q-c}=\overline{\rho_c}$, but
+  explicitly acknowledged that the identification of conjugate pairs with
+  the \emph{fibres of~$\Pi$} was a structurally motivated hypothesis, not
+  a derived result.
+  Two narrower, purely mathematical questions were left open about the
+  raw dynamics underlying that proposal:
 
   \begin{itemize}
     \item[(Q1)] Why is the raw Gram-Schmidt dynamics identical for
@@ -121,9 +141,16 @@ Structural Derivation of the Pair Observable\\
     Is it an arithmetic invariant of $(c,q)$, or a pipeline artefact?
   \end{itemize}
 
-  The present paper answers both questions.
-  O17 is not a correction of O16, but the first derivation of the
-  observable class dictated by~$\Pi$.
+  The present paper answers both questions, but only within its own
+  explicitly defined toy model (Section~\ref{sec:identity}), not for the
+  real O12/O13 pipeline.
+  The original draft's claim that this closes O16's logical gap and
+  derives ``the observable class dictated by~$\Pi$'' is withdrawn
+  (Section~\ref{sec:why_pair}): as Section~\ref{sec:identity} shows, the
+  answer to (Q1)--(Q2) in this toy model turns out to hold for
+  \emph{any} two blocks, conjugate or not, which is too strong a fact to
+  say anything specific about the involution $c \leftrightarrow q-c$ that
+  motivates O16's fibre proposal.
 
   \section{Identity of raw Gram-Schmidt dynamics}
   \label{sec:identity}
@@ -208,253 +235,301 @@ Structural Derivation of the Pair Observable\\
       if and only if its complex conjugate is.
     \end{proof}
 
-    \begin{remark}[Scope of Theorem~\ref{thm:identity}]
+    \begin{remark}[Scope of Theorem~\ref{thm:identity} --- corrected]
       \label{rem:scope}
-      This equality holds at the level of raw redundancy counts under
-      identical initial supports.
-      In the general case of differing supports, the two dynamics remain
-      isomorphic and yield identical asymptotic exponents, but the
-      pointwise equality of counts may fail.
+      The original draft stated that, for differing initial supports, the
+      two dynamics remain isomorphic but ``pointwise equality of counts
+      may fail.''
+      This is incorrect: Corollary~\ref{cor:structural_equiv} below
+      establishes exact pointwise equality even when $b_1 \neq b_1'$, for
+      a reason independent of the conjugation identity used in
+      Theorem~\ref{thm:identity}'s proof.
     \end{remark}
 
-    \begin{corollary}[Structural equivalence for arbitrary blocks]
+    \begin{corollary}[Block-independence of the raw redundancy count --- strengthened]
       \label{cor:structural_equiv}
-      For arbitrary block parameters $(b_1, b_2)$ and $(b_1', b_2')$
-      with $b_1 \neq b_1'$, the Gram-Schmidt dynamics of $\rho_c$ and
-      $\rho_{q-c}$ are isomorphic: they produce the same sequence of
-      redundancy counts up to a permutation of the generator ordering.
-      In particular, the asymptotic exponents satisfy:
-      \[
-        \delta_{q-c} = \delta_c.
-      \]
+      For \emph{any} two blocks $(c,b_1,b_2)$ and $(c',b_1',b_2')$ with
+      $c,c' \in \Fq$ arbitrary (not necessarily conjugate) and
+      $(b_1,b_2),(b_1',b_2') \in (\ZqZ)^2$ arbitrary,
+      \begin{equation}
+        \tilde\sigma_{c'}(n;\,b_1',b_2') \;=\; \tilde\sigma_c(n;\,b_1,b_2)
+        \qquad \text{exactly, for all } n \geq 0.
+        \label{eq:block_indep}
+      \end{equation}
+      In particular $\delta_{c'} = \delta_c$ for any $c,c'$, not only for
+      conjugate pairs.
+      The original draft's version of this statement (restricted to
+      $c'=q-c$, and only up to a permutation of generator ordering) is
+      superseded by this stronger, unconditional form.
     \end{corollary}
 
     \begin{proof}
-      The Gram-Schmidt process on $\{\rho_c(g)\,v_0\}$ depends on
-      the representation $\rho_c$ and the initial vector $v_0$, but not
-      on the specific labelling of~$e_{b_1}$.
-      Under $\rho_{q-c} = \overline{\rho_c}$, the representation matrices
-      are complex conjugates; the linear independence structure of any
-      set of vectors is invariant under this transformation
-      (since rank is preserved by conjugation).
-      The resulting redundancy sequences may differ shell-by-shell by
-      a permutation of generators within each shell, but they share the
-      same asymptotic power-law exponent.
+      From equation~\eqref{eq:weil_def}, for any character $\gamma\in\Fq$
+      and any $k\in\ZqZ$,
+      \[
+        \rho_\gamma(a,b,t)\,e_k \;=\; \omega^{\gamma(b(a+k)+t)}\,e_{a+k}:
+      \]
+      applying $\rho_\gamma(a,b,t)$ to the indicator $e_k$ produces a
+      \emph{single} basis vector, supported at $a+k$, scaled by a
+      unimodular phase.
+      By induction on word length (using the Heisenberg group law, whose
+      first coordinate is additive: the first coordinate of $g\cdot g'$ is
+      the sum of the first coordinates of $g$ and $g'$), for any
+      $g=(a,b,t)$ reachable in the Cayley graph,
+      \[
+        \rho_\gamma(g)\,v_0(\gamma,k,b_2)
+        \;=\; \varphi(g,\gamma,k,b_2)\;e_{a+k}
+      \]
+      for some unimodular $\varphi$ depending on $g,\gamma,k,b_2$ but
+      \emph{not} affecting which basis vector is produced: the support is
+      exactly $a+k \bmod q$, determined by $g$'s own first coordinate $a$
+      and the shift $k$, and is independent of $\gamma$ and of $b_2$
+      entirely.
+      Every vector in the orbit $\{\rho_\gamma(g)v_0 : g\in\mathrm{Shell}_{\leq n}\}$
+      is therefore a nonzero scalar multiple of a standard basis vector.
+      Gram-Schmidt redundancy for a family of vectors that are each
+      (nonzero scalar)$\times$(basis vector) depends only on which basis
+      indices repeat: two such vectors are linearly dependent iff they
+      share the same index, and linearly independent iff they do not,
+      regardless of their scalar phases.
+      Hence $\tilde\sigma_\gamma(n;k,b_2)$ equals the number of
+      $g\in\mathrm{Shell}_n$ whose label $a(g)+k \bmod q$ already occurred
+      among $\{a(h)+k \bmod q : h\in\mathrm{Shell}_{<n}\}$.
+      The multiset $\{a(g) \bmod q : g\in\mathrm{Shell}_m\}$ is a property
+      of the abstract Cayley graph alone --- the same for every $\gamma$
+      and every $k$ --- and translation by the constant $k$ is a bijection
+      of $\ZqZ$, hence preserves every collision and repetition statistic
+      of that multiset exactly.
+      Therefore $\tilde\sigma_\gamma(n;k,b_2)$ is exactly independent of
+      $\gamma$, $k$, and $b_2$: it equals a single function
+      $\tilde\sigma(n;q)$ of $n$ and $q$ alone, for every character and
+      every choice of initial block parameters.
+      Equation~\eqref{eq:block_indep} follows by evaluating this function
+      at $(c,b_1,b_2)$ and $(c',b_1',b_2')$.
     \end{proof}
 
-    \begin{remark}[What is structurally robust]
-Theorem~\ref{thm:identity} establishes point-wise equality of
-$\tilde\sigma_c$ and $\tilde\sigma_{q-c}$ under the support condition.
-Corollary~\ref{cor:structural_equiv} establishes exponent equality
-for arbitrary blocks.
-The physically relevant quantity is the exponent, not the
-shell-by-shell count: the unique structurally robust consequence
-is $\delta_{q-c} = \delta_c$.
+    \begin{remark}[What is structurally robust --- and what is not shown]
+Theorem~\ref{thm:identity} and Corollary~\ref{cor:structural_equiv}
+together establish exact pointwise equality of $\tilde\sigma$ across
+\emph{every} block, not only conjugate ones.
+This is stronger than what the original draft claimed, but it is a
+statement about this paper's own toy model
+(equation~\eqref{eq:weil_def}), and it is exactly this strength that
+undercuts the interpretive use made of it in
+Section~\ref{sec:why_pair}: a fact holding between arbitrary,
+non-conjugate blocks cannot, by itself, be evidence that conjugate
+pairs specifically are the fibres of a projection~$\Pi$ organised
+around the involution $c\leftrightarrow q-c$.
+Whatever such fibres are, this identity does not distinguish them from
+any other pairing of blocks.
     \end{remark}
 
-    \begin{remark}[Numerical confirmation]
-For the pair $(c=1, c=60)$ at $q=61$ with blocks
-$(b_1=27, b_2=2)$ and $(b_1=3, b_2=30)$, direct computation
-from first principles gives identical raw redundancy sequences:
-\[
-  (\tilde\sigma_1(n),\, \tilde\sigma_{60}(n)) \;=\;
-  (0, 2, 10, 34, 80, 162, 292, 474, 722, \ldots)
-\]
-for $n = 0, 1, 2, \ldots, 8$, confirming Theorem~\ref{thm:identity}
-to numerical precision.
+    \begin{remark}[Numerical confirmation --- corrected attribution]
+The original draft's worked example, for $(c{=}1,c{=}60)$ at $q=61$
+with blocks $(b_1{=}27,b_2{=}2)$ and $(b_1{=}3,b_2{=}30)$, used
+$b_1\neq b_1'$ ($27\neq3$): it therefore already tested
+Corollary~\ref{cor:structural_equiv}'s general case, not
+Theorem~\ref{thm:identity}'s restricted one, contrary to what it
+claimed to confirm.
+A script reproducing this example, and independently testing
+equation~\eqref{eq:block_indep} between genuinely unrelated
+(non-conjugate) blocks at $q=29$ out to $n=20$ (well past the point
+where shell growth wraps around $q$), is included in
+\texttt{code/o17\_block\_independence\_check.py}
+(\texttt{python3 o17\_block\_independence\_check.py}); all tested
+pairs agree exactly, as equation~\eqref{eq:block_indep} requires.
     \end{remark}
 
   \section{The factor $r(c,q)$ is a normalisation artefact}
   \label{sec:r_artefact}
 
-  \subsection{Pipeline normalisation}
+  \subsection{Normalisation, within this paper's own model}
 
-    The pipeline observable $\sigma_c(n)$ reported in O12--O15 is
-    \emph{not} the raw count $\tilde\sigma_c(n)$ of
-    equation~\eqref{eq:raw_sigma}.
-    It is a normalised quantity:
+    The original draft asserted that ``the pipeline observable $\sigma_c(n)$
+    reported in O12--O15'' is a normalised form of the raw count
+    $\tilde\sigma_c(n)$.
+    This is not established: no argument is given here, or anywhere in
+    this paper, that the real O12/O13 pipeline's $\Sigma_n^{(c_1,c_2,c_3)}$
+    decomposes this way, and Section~\ref{sec:why_pair} withdraws the
+    identification of this paper's model with that pipeline entirely.
+    What follows is instead a statement purely internal to this paper's
+    own toy model: \emph{if} a normalised observable is defined, within
+    this model, as
     \begin{equation}
-      \sigma_c(n;\, b_1, b_2)
-      \;=\; \frac{\tilde\sigma_c(n;\, b_1, b_2)}{D(c, b_1, b_2, n)},
+      \sigma_\gamma(n;\, k, b_2)
+      \;:=\; \frac{\tilde\sigma_\gamma(n;\, k, b_2)}{D(\gamma, k, b_2, n)}
       \label{eq:sigma_normalised}
     \end{equation}
-    where the denominator $D(c, b_1, b_2, n)$ depends on the block
-    parameters and the shell index in a way determined by the
-    pipeline implementation.
+    for some denominator $D$ depending on the block parameters and shell
+    index, \emph{then} the following holds.
 
-  \subsection{Consequence for $r$}
+  \subsection{Consequence of block-independence}
 
-    Since $\tilde\sigma_{q-c}(n) = \tilde\sigma_c(n)$ by
-    Theorem~\ref{thm:identity}, the ratio
+    By Corollary~\ref{cor:structural_equiv}, $\tilde\sigma_\gamma(n;k,b_2)$
+    is exactly independent of $\gamma$, $k$, and $b_2$.
+    Consequently, for \emph{any} such normalised observable
+    satisfying~\eqref{eq:sigma_normalised}, all of its block-dependence ---
+    whatever block-dependence it exhibits --- resides entirely in the
+    denominator $D$:
     \begin{equation}
-      r(c,q;\, b_1, b_2, b_1', b_2')
-      \;=\; \frac{\sigma_{q-c}(n;\, b_1', b_2')}{\sigma_c(n;\, b_1, b_2)}
-      \;=\; \frac{D(c, b_1, b_2, n)}{D(q-c, b_1', b_2', n)}
+      \sigma_{\gamma'}(n;\,k',b_2') \big/ \sigma_\gamma(n;\,k,b_2)
+      \;=\; D(\gamma,k,b_2,n) \big/ D(\gamma',k',b_2',n),
       \label{eq:r_ratio}
     \end{equation}
-    is a \emph{ratio of normalisation denominators}.
-    It is constant in~$n$ (as observed empirically) because the
-    relative normalisation of two blocks is shell-independent
-    once the block parameters are fixed.
+    since the $\tilde\sigma$ factors cancel identically.
+    In particular, restricted to conjugate pairs $\gamma'=q-\gamma$, this
+    recovers O16's ratio $r(c,q) = D(c,k,b_2,n)/D(q-c,k',b_2',n)$.
 
-    \begin{proposition}[$r$ depends on block parameters, not on $(c,q)$]
+    \begin{proposition}[$r$ is a normalisation artefact --- proof corrected]
       \label{prop:r_artefact}
-      The factor $r$ in equation~\eqref{eq:r_ratio} depends on the
-      specific block instances $(b_1, b_2)$ and $(b_1', b_2')$,
-      not solely on the character pair $(c, q-c)$.
-      In particular, two blocks with the same character~$c$ but different
-      $(b_1, b_2)$ parameters yield different values of~$r$ when paired
-      with the same dual block.
+      Within the setting of equation~\eqref{eq:sigma_normalised}, if $r$
+      (or its generalisation~\eqref{eq:r_ratio} between arbitrary blocks)
+      varies across choices of $(k,b_2)$ or $(k',b_2')$ at fixed
+      $(\gamma,\gamma')$, that variation is entirely a property of $D$: it
+      cannot originate in $\tilde\sigma$, which
+      Corollary~\ref{cor:structural_equiv} shows is exactly the same
+      function for every block.
     \end{proposition}
 
     \begin{proof}
-      Direct computation for $q = 29$: the character $c = 11$ appears
-      in the pipeline with instances $(b_1=18, b_2=19)$ and $(b_1=25, b_2=5)$.
-      Paired with the block $c = 18$, $(b_1=6, b_2=15)$:
-      \begin{align*}
-        \sigma_{18}(n;\,6,15) / \sigma_{11}(n;\,18,19) &= 2 \quad \forall n \geq 1,\\
-        \sigma_{18}(n;\,6,15) / \sigma_{11}(n;\,25,5)  &= 1 \quad \forall n \geq 1.
-      \end{align*}
-      The same dual block gives $r = 2$ or $r = 1$ depending on
-      which instance of the primal block is used.
-      Therefore $r$ is not a function of $(c, q)$ alone.
+      Immediate from equation~\eqref{eq:r_ratio} and
+      Corollary~\ref{cor:structural_equiv}: the right-hand side of
+      \eqref{eq:r_ratio} is the \emph{only} place block-parameter
+      dependence can enter, since the left-hand side's numerator and
+      denominator both factor through the single, block-independent
+      function $\tilde\sigma(n;q)$.
     \end{proof}
 
-  \subsection{Consequences}
-
-    Proposition~\ref{prop:r_artefact} has three immediate consequences.
-
-    \begin{corollary}[Inertness of $r$ for the exponent]
-      \label{cor:r_inert}
-      Since $r$ is shell-independent and positive,
-      $\log\sigma_{\mathrm{pair}}(n) = \log r + \log\sigma_c(n) + \log\sigma_{q-c}(n)$,
-      so:
-      \[
-        \delta_{\mathrm{pair}}
-        := -\frac{\mathrm{d}\log\sigma_{\mathrm{pair}}}{\mathrm{d}\log n}
-        = \delta_c + \delta_{q-c} = 2\,\delta_c.
-      \]
-      The value of $r$ does not affect the exponent.
-    \end{corollary}
-
-    \begin{remark}[$r$ is gauge-like]
-      \label{rem:r_gauge}
-      The factor $r(c,q)$ is not only non-intrinsic to the representation,
-      but is gauge-like in the following precise sense:
-      it depends on the normalisation convention used to define $\sigma$,
-      while leaving all asymptotic exponents invariant.
-      Different choices of the denominator $D(c,b_1,b_2,n)$ yield
-      different values of $r$, but the same $\delta_{\mathrm{pair}}$.
-      An observable that is invariant under changes of normalisation
-      convention is precisely what is needed for physical interpretation:
-      the exponent $\delta_{\mathrm{pair}}$ is such an observable; $r$ is not.
-      The factor $r(c,q)$ is therefore not an intrinsic invariant but a
-      normalisation-dependent quantity, analogous to a gauge choice.
+    \begin{remark}[What changed from the original draft]
+The original draft's Proposition (there stated as ``$r$ depends on
+block parameters, not on $(c,q)$'') was supported by a specific numeric
+example ($q=29$, character $c=11$ with two block instances, paired
+against $c=18$, giving $r=2$ or $r=1$ depending on which instance was
+used).
+This repository has never carried code computing $\sigma_c(n)$, $r$, or
+$D$: the example was not reproducible and is withdrawn.
+The proposition's \emph{conclusion} survives, but for a different, and
+now unconditional, reason: it is a direct logical consequence of
+Corollary~\ref{cor:structural_equiv}, needing no numeric example at all,
+proved above.
     \end{remark}
 
-    \begin{corollary}[Closure of O16 Remark~6.4]
+  \subsection{Consequences, and their scope}
+
+    \begin{corollary}[Inertness of $r$ for the exponent --- conditional]
+      \label{cor:r_inert}
+      \emph{If}, in addition to~\eqref{eq:sigma_normalised}, the ratio $r$
+      of equation~\eqref{eq:r_ratio} happens to be independent of the
+      shell index~$n$, \emph{then}
+      $\log\sigma_{\mathrm{pair}}(n) = \log r + \log\sigma_c(n) + \log\sigma_{q-c}(n)$,
+      so $\delta_{\mathrm{pair}} = \delta_c + \delta_{q-c}$: the value of
+      $r$ does not affect the exponent.
+      This is the same conditional statement as O16's
+      equation~(doubling), restated here; whether any sourced $D$
+      satisfies the hypothesis is not addressed by this paper.
+    \end{corollary}
+
+    \begin{remark}[$r$ is gauge-like, within this model]
+      \label{rem:r_gauge}
+      Within the setting of equation~\eqref{eq:sigma_normalised}, $r$ is
+      not intrinsic to the representation: it is entirely a property of
+      the normalisation $D$ (Proposition~\ref{prop:r_artefact}), and, when
+      Corollary~\ref{cor:r_inert}'s hypothesis holds, leaves
+      $\delta_{\mathrm{pair}}$ invariant.
+      Both statements are internal to this paper's own model and are not
+      shown to describe the real O12/O13 pipeline's actual normalisation,
+      whose functional form this paper does not examine.
+    \end{remark}
+
+    \begin{corollary}[Closure of O16 Remark~6.4, within this model]
       \label{cor:remark_closure}
-      The suggestion in O16 Remark~6.4 that $r(c,q)$ might originate
-      from quadratic Gauss sums or character multiplicities is not
-      supported.
-      $r$ is determined by the pipeline normalisation~$D(c, b_1, b_2, n)$,
-      which is a property of the measurement protocol, not of the
-      representation.
+      The suggestion in O16 Remark~6.4 that $r(c,q)$ might originate from
+      quadratic Gauss sums or character multiplicities is not supported by
+      this paper's model, in which $r$ is determined entirely by the
+      normalisation $D$ (Proposition~\ref{prop:r_artefact}), not by any
+      representation-theoretic quantity.
+      This conclusion is scoped to the model of
+      equation~\eqref{eq:sigma_normalised}; it is not established for the
+      real pipeline's actual, unexamined normalisation.
     \end{corollary}
 
-    \begin{corollary}[The structural invariant]
+    \begin{corollary}[The structural invariant --- strengthened, and reinterpreted]
       \label{cor:invariant}
-      The only structurally robust quantity is the equality
-      \[
-        \delta_{q-c} = \delta_c,
-      \]
-      which holds exactly as a consequence of $\rho_{q-c} = \overline{\rho_c}$
-      and the norm-invariance of Gram-Schmidt orthogonalisation.
-      This equality is independent of the pipeline normalisation.
+      The raw redundancy count $\tilde\sigma$ is exactly block-independent
+      (Corollary~\ref{cor:structural_equiv}): $\delta$ computed from
+      $\tilde\sigma$ alone is the \emph{same} for every block, not only
+      conjugate ones.
+      Whether the \emph{normalised, reported} exponent $\delta_c$ varies
+      across blocks at all --- as the real O-series measurements show it
+      empirically does --- therefore depends entirely on properties of the
+      normalisation $D$ that this paper's toy model leaves unspecified.
+      Equation~\eqref{eq:sigma_normalised} is a hypothesis about the shape
+      of that normalisation, not a description of it; nothing here derives
+      $D$ or shows it exists for the real pipeline.
     \end{corollary}
 
-  \section{Why the pair is the correct observable}
+  \section{Withdrawn: interpretive claims about $\Pi$ and O14--O15}
   \label{sec:why_pair}
 
-  \subsection{The hierarchy of observables}
+  The original draft's ``hierarchy of observables,'' ``why fibre-level is
+  the correct class,'' and ``requalification of O14--O15'' subsections are
+  withdrawn in full.
+  Two independent reasons apply.
 
-    The O-series has progressively refined the observable:
+  \paragraph{The pipeline identification is not established.}
+    Everything below rested on treating this paper's toy model
+    (Section~\ref{sec:identity}) as a derivation of ``the observable class
+    dictated by $\Pi$'' for the real O12/O13 pipeline.
+    No argument anywhere in this paper connects the toy representation of
+    equation~\eqref{eq:weil_def} --- whose fingerprint vectors are single
+    \emph{position}-basis vectors $e_k$ --- to the real pipeline's actual
+    fingerprint construction, whose vectors are single
+    \emph{frequency}-basis vectors indexed by a generic triple
+    $(c_1,c_2,c_3)$, not a scalar~$c$.
+    The claim that conjugate pairs ``are the fibres of $\Pi$ as measured
+    by the real pipeline'' is accordingly withdrawn, along with the
+    consequent ``requalification'' of O14--O15 as correct-but-incomplete
+    block-level analyses.
 
-    \begin{itemize}
-      \item O12--O13: $\bar\sigma(n)$ = arithmetic mean over individual blocks.
-      \emph{Observable class: block-level mean.}
-      \item O14: corrected $\bar\sigma$ for normalisation and central-phase
-      contributions. \emph{Observable class: corrected block-level mean.}
-      \item O15: $R_n^{\mathrm{eff}}$ defined via exact block-level dynamics.
-      \emph{Observable class: exact block-level.}
-      \item O16--O17: $R_n^{\mathrm{pair}}$ = mean over conjugate pairs.
-      \emph{Observable class: fibre-level.}
-    \end{itemize}
+  \paragraph{The argument, taken on its own terms, proves too much.}
+    Independently of the pipeline question, the original draft's central
+    step --- ``$\rho_c$ and $\rho_{q-c}$ produce identical Gram-Schmidt
+    dynamics, indicating indistinguishable observable content, hence the
+    same fibre of $\Pi$'' --- no longer supports what it is used for.
+    Corollary~\ref{cor:structural_equiv} (Section~\ref{sec:identity})
+    shows that \emph{every} pair of blocks, conjugate or not, produces
+    identical raw Gram-Schmidt dynamics in this toy model.
+    Applying the original draft's own inference rule (identical dynamics
+    $\Rightarrow$ same fibre) to that stronger fact would place
+    \emph{every} block in a single common fibre, collapsing the fibre
+    structure entirely --- not the pairwise structure $\{c,q-c\}$ the
+    argument was meant to establish.
+    Since the original draft did not intend or defend that collapsed
+    conclusion, its inference rule cannot be sound as stated; the
+    ``identical dynamics'' fact, on its own, does not license any
+    conclusion about which blocks share a fibre.
 
-    Each step corrects the previous one without invalidating it:
-    O14--O15 correctly analyse the block-level observable;
-    their results are exact within that observable class.
-    The move to O16--O17 is not a correction of O14--O15 but
-    a change of observable class.
-    The observable was not mis-measured --- it was mis-identified.
+  \paragraph{O15's citation, corrected.}
+    The withdrawn ``O15 Corollary~4.8 establishes that no reweighting of
+    block data recovers the fibre-level exponent'' cited an unconditional
+    no-go that O15's own corrective revision found false as originally
+    stated (explicit counterexample: asymmetric weight concentration
+    exceeds $\dhat_{\mathrm{exact}}$).
+    The corrected corollary is narrower --- specific dynamical weights,
+    hypothesis unverified at any tested prime, bounding against
+    $\dhat_{\mathrm{exact}}$ --- and in any case concerns the real
+    pipeline's block-level observable, not this paper's toy model, to
+    which it was never shown to apply.
+    The ``complementarity of O15 and O17'' remark, and the ``O15 closes
+    the block-level programme; O17 opens the fibre-level programme''
+    framing, depend on both withdrawn premises and are withdrawn with
+    them.
 
-  \subsection{Why fibre-level is the correct class}
-
-    The projection $\Pi : \chi \to \mathcal{O}$ is non-injective by
-    the Born--Infeld constraint~\cite{Beau2026a2}.
-    An admissibility condition on $\mathcal{O}$ therefore corresponds
-    to a condition on \emph{equivalence classes under $\Pi$}, not
-    on individual preimage configurations.
-    This is the key structural point: the non-injectivity of $\Pi$
-    acts at the level of fibres $\Pi^{-1}(y)$, not at the level of
-    individual blocks $\rho_c$.
-    Observable quantities must therefore be defined on these
-    equivalence classes.
-
-    In the Weil realisation of $\Heis(\ZqZ)$, the minimal non-injectivity
-    is the parity involution realised as $c \leftrightarrow q-c$.
-    An admissible observable at character~$c$ must be jointly
-    admissible with its conjugate at $q-c$: the two preimages
-    $\rho_c$ and $\rho_{q-c}$ represent the same observable class,
-    so admissibility must be assessed simultaneously for both.
-    This identification is supported by
-    Theorem~\ref{thm:identity} and Corollary~\ref{cor:structural_equiv}:
-    conjugate representations $\rho_c$ and $\rho_{q-c}$ produce
-    identical Gram-Schmidt dynamics, indicating that they correspond to
-    indistinguishable observable content under $\Pi$.
-    Two configurations with indistinguishable observable content
-    belong to the same fibre of $\Pi$ by definition.
-
-    Theorem~\ref{thm:identity} and Corollary~\ref{cor:structural_equiv}
-    therefore show that the two preimages carry
-    \emph{identical dynamical information} (same Gram-Schmidt dynamics).
-    Measuring only one of them therefore captures exactly
-    half of the dynamically accessible information about the fibre.
-    The pair observable $\sigma_{\mathrm{pair}}(n) = \sigma_c(n) \cdot \sigma_{q-c}(n)$
-    is the natural joint measure of fibre admissibility, corresponding
-    to the product of individual admissibilities under the assumption
-    of fibre independence.
-
-  \subsection{Requalification of O14--O15}
-
-    O14~\cite{Beau2026a18} and O15~\cite{Beau2026a19} are not
-    erroneous.
-    They correctly characterise what happens when admissibility is
-    assessed at the block level rather than the fibre level.
-    The aggregation no-go (O15 Corollary~4.8) establishes that
-    no reweighting of block data recovers the fibre-level exponent:
-    this is precisely because block-level observables are
-    half-fibres, and no averaging over half-fibres reconstructs
-    the full-fibre observable.
-
-    \begin{remark}[Complementarity of O15 and O17]
-O15 establishes the impossibility of recovering the correct
-exponent from block-level data.
-O17 establishes what the correct exponent is and why it requires
-fibre-level data.
-The two results are complementary: O15 closes the block-level
-programme; O17 opens the fibre-level programme.
-    \end{remark}
+  No claim about $\Pi$'s fibre structure, about O14--O15's completeness,
+  or about the physical status of conjugate pairs is asserted in this
+  revision.
+  What Section~\ref{sec:identity} establishes stands on its own, entirely
+  independently of this section's withdrawn interpretive superstructure.
 
   \section{Summary and open directions}
   \label{sec:summary}
@@ -462,73 +537,79 @@ programme; O17 opens the fibre-level programme.
   \subsection{What is established}
 
     \begin{enumerate}
-      \item The raw Gram-Schmidt redundancy dynamics are exactly identical for
-      $\rho_c$ and $\rho_{q-c}$ under equal initial support
-      (Theorem~\ref{thm:identity}), and structurally isomorphic for
-      arbitrary block parameters (Corollary~\ref{cor:structural_equiv}),
-      as a consequence of $\rho_{q-c} = \overline{\rho_c}$ and
-      norm-invariance of the Gram-Schmidt process.
-      The unique structurally robust consequence is $\delta_{q-c} = \delta_c$.
+      \item Within this paper's own toy Weil-block model
+      (equation~\eqref{eq:weil_def}), the raw Gram-Schmidt redundancy
+      count $\tilde\sigma$ is \emph{exactly} independent of the
+      character~$c$ and of both initial-condition parameters $(b_1,b_2)$
+      --- not only equal for conjugate pairs, but identical for
+      \emph{any} two blocks whatsoever
+      (Theorem~\ref{thm:identity}, Corollary~\ref{cor:structural_equiv}).
+      This is stronger than, and supersedes, the original draft's
+      permutation-isomorphism claim.
 
-      \item The factor $r(c,q)$ in O16 is a pipeline normalisation
-      artefact (Proposition~\ref{prop:r_artefact}), not an
-      arithmetic invariant of the representation.
-      It is gauge-like (Remark~\ref{rem:r_gauge}): it depends on the
-      normalisation convention, while leaving all asymptotic
-      exponents invariant.
-      The suggestion in O16 Remark~6.4 that $r$ might originate from
-      quadratic Gauss sums or character multiplicities is not supported.
+      \item This block-independence is a purely combinatorial fact about
+      the underlying Cayley graph (translation-invariance of shell-label
+      collisions), proved without appeal to the conjugation identity
+      $\rho_{q-c}=\overline{\rho_c}$, although that identity remains
+      independently true and is used in Theorem~\ref{thm:identity}'s own
+      proof for the restricted case.
 
-      \item The equality $\delta_{q-c} = \delta_c$ is the unique
-      structurally robust consequence, independent of pipeline
-      normalisation (Corollary~\ref{cor:invariant} and
-      Corollary~\ref{cor:structural_equiv}).
+      \item If a normalised observable is defined, within this paper's
+      model, as $\sigma_\gamma := \tilde\sigma/D$ for some denominator
+      $D$ (equation~\eqref{eq:sigma_normalised}), then any block-dependence
+      it exhibits comes entirely from $D$
+      (Proposition~\ref{prop:r_artefact}) --- a direct consequence of
+      item~1, not an independently verified empirical claim.
+      This is scoped strictly to this paper's own model; whether it says
+      anything about the real O12/O13 pipeline's actual normalisation is
+      not addressed.
 
-      \item The pair observable is the correct unit of admissibility
-      because the non-injective projection $\Pi$ requires fibre-level
-      assessment, and conjugate pairs are the fibres of~$\Pi$
-      in the Weil realisation.
-
-      \item O14--O15 are correct analyses of the block-level observable.
-      The move to fibre-level is a change of observable class,
-      not a correction of previous errors.
+      \item \textbf{Withdrawn.}
+      The original draft's claims that the pair observable is the
+      correct unit of admissibility because conjugate pairs are the
+      fibres of $\Pi$, and that O14--O15 are ``correct-but-incomplete''
+      block-level analyses requalified by this paper, are withdrawn in
+      full (Section~\ref{sec:why_pair}): the pipeline identification
+      needed for either claim is not established, and item~1's stronger
+      form shows the ``identical dynamics $\Rightarrow$ same fibre''
+      argument, taken literally, would place \emph{every} block in one
+      fibre --- not the conclusion the original draft drew from it.
     \end{enumerate}
 
   \subsection{Open directions}
 
-    \paragraph{Primary open problem: derivation of the conjugate pairing.}
-      The identification of $c \leftrightarrow q-c$ as the minimal
-      non-injectivity of $\Pi$ remains a structural hypothesis
-      (O16 Remark~6.2, O17 Section~\ref{sec:why_pair}).
-      A formal derivation within the Cosmochrony framework ---
-      showing that the parity involution $c \mapsto q-c$ is a
-      \emph{necessary} consequence of the projection structure~$\Pi$
-      and the Born--Infeld constraint --- would promote the main result
-      from a well-supported structural result to a theorem.
-      This is the primary open problem of the fibre-level programme.
+    \paragraph{Whether this toy model says anything about the real pipeline.}
+      This paper's model (equation~\eqref{eq:weil_def}) represents each
+      block by a single \emph{position}-basis vector; the real O12/O13
+      pipeline's exact fingerprints are single \emph{frequency}-basis
+      vectors indexed by a generic triple $(c_1,c_2,c_3)$.
+      Whether a corresponding block-independence result holds for the
+      real pipeline's raw (pre-normalisation) redundancy count, and if
+      so what its normalisation $D$ actually is, is open and not
+      addressed by this paper.
 
-    \paragraph{Secondary: canonical normalisation of $\sigma$.}
-      The pipeline normalisation $D(c, b_1, b_2, n)$ is currently
-      implicit in the O12/O13 implementation.
-      Making it explicit and defining a canonical normalisation
-      independent of $(b_1, b_2)$ would eliminate $r$ entirely from
-      the pair observable, producing a version of $\sigma_{\mathrm{pair}}$
-      that is genuinely independent of the measurement convention.
-      This is a technical rather than conceptual question.
+    \paragraph{The fibre structure of $\Pi$.}
+      The identification of any specific pairing or grouping of blocks
+      with the fibres of the non-injective projection~$\Pi$ remains
+      entirely open.
+      Item~1's stronger block-independence result shows that ``identical
+      raw dynamics'' cannot by itself be the criterion, since it holds
+      too broadly; a different, genuinely selective criterion would be
+      needed to justify grouping specifically conjugate blocks (or any
+      other specific grouping) into fibres.
 
-    \paragraph{Upper bound of the phenomenological window.}
-      Numerical exploration (post-O16) shows that the spectrum
-      of $\delta_{\mathrm{pair}}$ has a hard lower bound near~$7.4$
-      and extends significantly above~$10.6$.
-      The mechanism selecting $[7.4, 10.6]$ as the physical
-      sub-spectrum is not yet identified; it appears to be a
-      dynamical persistence criterion rather than a spectral one.
+    \paragraph{Upper bound of the phenomenological window --- unreproducible, withdrawn.}
+      The original draft cited ``numerical exploration (post-O16)''
+      showing a spectrum of $\delta_{\mathrm{pair}}$ values bounded near
+      $7.4$ and extending above $10.6$.
+      This repository has never carried code or data supporting this
+      claim; it is withdrawn for lack of a reproducible source.
 
   \section*{Acknowledgements}
 
-  The author thanks the extended Cosmochrony programme discussions
-  that led to the identification of the normalisation origin of~$r$
-  and the structural derivation of the fibre-level observable.
+  The author thanks the extended Cosmochrony programme discussions that
+  led to the original identification of the question addressed in
+  Section~\ref{sec:identity}.
 
   \clearpage
   \bibliographystyle{plain}
